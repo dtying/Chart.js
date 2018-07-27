@@ -220,6 +220,11 @@ module.exports = function(Chart) {
 			var spacing = 1.5 * fontSize;
 
 			for (var i = 0; i < text.length; ++i) {
+				// start customization
+				// ctx.font = fontSize;
+				ctx.font = i % 2 === 0 ? '16px DIN Medium' : '12px Source Han Sans CN Helvetica, Arial, sans-serif';
+				ctx.fillStyle = fontColor[i];
+				// end customization
 				ctx.fillText(text[i], position.x, y);
 				y += spacing;
 			}
@@ -268,14 +273,25 @@ module.exports = function(Chart) {
 
 				// Keep this in loop since we may support array properties here
 				var pointLabelFontColor = helpers.valueAtIndexOrDefault(pointLabelOpts.fontColor, i, globalDefaults.defaultFontColor);
+				//start customization
 				ctx.font = plFont.font;
 				ctx.fillStyle = pointLabelFontColor;
-
+				
 				var angleRadians = scale.getIndexAngle(i);
 				var angle = helpers.toDegrees(angleRadians);
 				ctx.textAlign = getTextAlignForAngle(angle);
 				adjustPointPositionForLabelHeight(angle, scale._pointLabelSizes[i], pointLabelPosition);
-				fillText(ctx, scale.pointLabels[i] || '', pointLabelPosition, plFont.size);
+				fillText(ctx, scale.pointLabels[i] || '', pointLabelPosition, plFont.size, pointLabelFontColor);
+				//end customization
+
+				// ctx.font = plFont.font;
+				// ctx.fillStyle = pointLabelFontColor;
+				// 
+				// var angleRadians = scale.getIndexAngle(i);
+				// var angle = helpers.toDegrees(angleRadians);
+				// ctx.textAlign = getTextAlignForAngle(angle);
+				// adjustPointPositionForLabelHeight(angle, scale._pointLabelSizes[i], pointLabelPosition);
+				// fillText(ctx, scale.pointLabels[i] || '', pointLabelPosition, plFont.size);
 			}
 		}
 	}
