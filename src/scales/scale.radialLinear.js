@@ -214,7 +214,7 @@ module.exports = function(Chart) {
 		return 'right';
 	}
 
-	function fillText(ctx, text, position, fontSize) {
+	function fillText(ctx, text, position, fontSize, fontColor) {
 		if (helpers.isArray(text)) {
 			var y = position.y;
 			var spacing = 1.5 * fontSize;
